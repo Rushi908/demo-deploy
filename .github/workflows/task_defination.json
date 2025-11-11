@@ -7,7 +7,7 @@
     "memory": "8192",
     "containerDefinitions": [
       {
-        "name": "llmops-live-container",
+        "name": "llmopsrepolive",
         "image": "963200076074.dkr.ecr.us-east-1.amazonaws.com/llmopsrepolive",
         "cpu": 1024,
         "essential": true,
@@ -16,7 +16,7 @@
             "containerPort": 8080,
             "hostPort": 8080,
             "protocol": "tcp",
-            "name": "llmops-live-container-8080-tcp",
+            "name": "llmopsrepolive-8080-tcp",
             "appProtocol": "http"
           }
         ],
