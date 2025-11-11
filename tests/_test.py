@@ -51,37 +51,23 @@ def test_invalid_input():
 # -------------------------------
 # Code Quality Tests
 # -------------------------------
+import subprocess
+import pytest
+
 @pytest.mark.quality
 def test_flake8():
-    """Check code style using flake8"""
-    result = subprocess.run(
-        ["flake8", "--max-line-length=100", "_test.py"],  # ✅ run only on this file
-        capture_output=True,
-        text=True
-    )
-    if result.returncode != 0:
-        pytest.fail(f"Flake8 issues found:\n{result.stdout}")
-
+    """Run flake8 linting."""
+    result = subprocess.run(["flake8", "src"], capture_output=True, text=True)
+    assert result.returncode == 0, f"Flake8 issues found:\n{result.stdout}"
 
 @pytest.mark.quality
 def test_pylint():
-    """Check code style using pylint"""
-    result = subprocess.run(
-        ["pylint", "--disable=R,C", "_test.py"],  # ✅ lint this file only
-        capture_output=True,
-        text=True
-    )
-    if result.returncode != 0:
-        pytest.fail(f"Pylint issues found:\n{result.stdout}")
-
+    """Run pylint checks."""
+    result = subprocess.run(["pylint", "src"], capture_output=True, text=True)
+    assert result.returncode == 0, f"Pylint issues found:\n{result.stdout}"
 
 @pytest.mark.quality
 def test_black_formatting():
-    """Check formatting with Black"""
-    result = subprocess.run(
-        ["black", "--check", "_test.py"],  # ✅ check this file
-        capture_output=True,
-        text=True
-    )
-    if result.returncode != 0:
-        pytest.fail(f"Black formatting issues found:\n{result.stdout}")
+    """Ensure black formatting compliance."""
+    result = subprocess.run(["black", "--check", "src"], capture_output=True, text=True)
+    assert result.returncode == 0, f"Black formatting issues found:\n{result.stdout}"
