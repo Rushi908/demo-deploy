@@ -28,4 +28,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest -v tests/test_*.py  # use a pattern for all test files
+          pytest -v tests/  # use a pattern for all test files
